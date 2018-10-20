@@ -29,28 +29,21 @@ SDL_Surface * load_image(char *path)
 //Display the image
 
 int display_image(SDL_Surface *img)
-{
-  //const int WIDTH  = 640;
-  //const int HEIGHT = 480;
-  
+{ 
   SDL_Window *win = 0;
   SDL_Renderer *renderer = 0;
   SDL_Texture *texture = NULL;
-  //int w, h;
   
   //Create the window with the image inside
   
   win = SDL_CreateWindow("Image Loading", 100, 100,  img->w, img->h, 0);
   renderer = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   texture = SDL_CreateTextureFromSurface(renderer, img);
-  //SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-  
   
   if (!img)
     {
       printf("No image to load");
     }
-  //SDL_Rect texr; texr.x = WIDTH/2; texr.y = HEIGHT/2; texr.w = w*2; texr.h = h*2; 
    if (!texture)
      {
        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture from surface: %s", SDL_GetError());
@@ -70,7 +63,6 @@ int display_image(SDL_Surface *img)
 	     break;
 	 } 
        SDL_RenderClear(renderer);
-       //SDL_RenderCopy(renderer, texture, NULL, &texr);
        SDL_RenderCopy(renderer, texture, NULL, NULL);
        SDL_RenderPresent(renderer);
      }

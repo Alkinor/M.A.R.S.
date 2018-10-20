@@ -126,6 +126,8 @@ SDL_Surface *imgSection(SDL_Surface *img, int beginningW, int beginningH, int en
 /*The 4 next functions are here to allow us
 to cut the image into words of the text*/
 
+//Find the first character of the image.
+
 int firstCharacter(SDL_Surface *img, int height)
 {
   Uint32 pixel;
@@ -148,6 +150,8 @@ int firstCharacter(SDL_Surface *img, int height)
     }
   return first;
 }
+
+//Find the last character of the image.
 
 int lastCharacter(SDL_Surface *img, int height)
 {
@@ -174,6 +178,12 @@ int lastCharacter(SDL_Surface *img, int height)
     }
   return last;
 }
+
+/*Find the average space of the line.
+We will then compare this value to a space width
+If the space width is greater than the average, then it is
+a space between two words. Else it is a space between
+two characters.*/
 
 int averageSpace(SDL_Surface *img, int beginning, int end, int height)
 {
@@ -207,6 +217,9 @@ int averageSpace(SDL_Surface *img, int beginning, int end, int height)
     }
   return widthSpaceCount/spaceCount;
 }
+
+/*Search words of the line between the first
+character of the line to the last*/
 
 SDL_Surface *displayWords(SDL_Surface *img, int height, int heightMax)
 {
@@ -291,11 +304,13 @@ Matrix convertIntoMatrix(SDL_Surface *img)
   return matrix;
 }
 
+//Copy the image into the destination
+
 void resize(SDL_Surface *img, SDL_Surface *dest)
 {
   double rx, ry;
-  rx = dest->w*1.0/img->w;
-  ry = dest->h*1.0/img->h;
+  rx = dest->w*1.0/img->w; //We compute the ratio of the width and weight between the new image
+  ry = dest->h*1.0/img->h; //and the old one
   Uint32 pixel;
   Uint8 r, g, b;
   for(int i = 0; i < dest->w; i++)
@@ -308,6 +323,10 @@ void resize(SDL_Surface *img, SDL_Surface *dest)
 	}
     }
 }
+
+/*Create a new empty image and call a function to copy an image
+into the empty one, but with new dimensions.
+This will be usefull for the neural network*/
 
 SDL_Surface *redimension(SDL_Surface *img, int newDimW, int newDimH)
 {
@@ -337,12 +356,12 @@ int delimitChar(SDL_Surface *img, int initialPoint, int currentWidth)
   return j;
 }
 
-void detectChar(SDL_Surface *img)
+/*void detectChar(SDL_Surface *img)
 {
   Uint32 pixel;
   Uint8 r, g, b;
-  int beginningW = 0;//, beginningH = 0;
-  //int endW = 0, endH = 0;
+  int beginningW = 0, beginningH = 0;
+  int endW = 0, endH = 0;
   int first = 0, cutting = 1;
   for(int i = 0; i < img->h; i++)
     {
@@ -354,12 +373,12 @@ void detectChar(SDL_Surface *img)
 	    {
 	      if(cutting == 1)
 		{
-		  printf("tamer");
+		  printf("passed");
 		  if (first == 0)
 		    {
 		      beginningW = j;
-		      //beginningH = i;
-		      //endW = j;
+		      beginningH = i;
+		      endW = j;
 		      first = 1;
 		      cutting = 0;
 		      printf("%i\n", beginningW);
@@ -367,33 +386,33 @@ void detectChar(SDL_Surface *img)
 		  else
 		    {
 		      beginningW = j;;
-		      //endW = j;
+		      endW = j;
 		      cutting = 0;
 		    }
 		}
 	    }
 	  if(((r == 0) & (g == 0) & (b == 0)) || ((r == 255) & (g == 255) & (b == 255)))
 	    {
-	      /*if(cutting == 0)
+	      if(cutting == 0)
 		{
 		  endW += 1;
-		  }*/
+		  }
 	    }
 	  if((r == 0) & (g == 255) & (b == 0) & (cutting == 1))
 	    {
 	      printf("A\n");
-	      /*if(first)
+	      if(first)
 		{
 		  endH = delimit_char(img, i, j);
-		}*/
+		}
 	    }
 	  if((r == 0) && (g == 0) && (b == 0))
 	    {
-	      printf("mes couilles\n");
+	      printf("stop here\n");
 	      break;
 	    }
 	}
     }
-}
+}*/
 
 

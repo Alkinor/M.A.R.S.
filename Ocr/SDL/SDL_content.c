@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-//#include <SDL2/SDL_image.h>
 #include <unistd.h>
 
 //Initialize the SDL2 library to allow us to do some image treatment

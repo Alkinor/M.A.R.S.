@@ -12,7 +12,7 @@ void back_prop_w(float out, float ideal, float w1[], float w2[], float w3[])
     }
   for (int i = 0; i < 2; i++)
     {
-      temp3[i] +=  error * eta * derivative_sig(-error * w3[i]); 
+      temp3[i] +=  error * eta * sigmoid(-error * w3[i]); 
     }
   float temp2[4];
   for (int i = 0; i < 2; i++)

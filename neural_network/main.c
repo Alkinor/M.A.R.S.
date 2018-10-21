@@ -139,4 +139,23 @@ int main()
     }
   printf("w1 = %f, %f, %f, %f\n w2 = %f, %f, %f, %f\n w3 = %f, %f\n b1 = %f, %f\n b2 = %f, %f\n  b3 = %f\n", w1[0], w1[1], w1[2], w1[3], w2[0], w2[1],w2[2], w2[3], w3[0], w3[1], b1[0], b1[1], b2[0], b2[1], b3[0]);   
   return 0;
+  FILE *opening;
+  opening = fopen("weights_and_bias", "w");
+  fprintf(opening,"%f\n", w1[0]);
+  fprintf(opening,"%f\n", w1[1]);
+  fprintf(opening,"%f\n", w1[2]);
+  fprintf(opening,"%f\n", w1[3]);
+  fprintf(opening,"%f\n", w2[0]);
+  fprintf(opening,"%f\n", w2[1]);
+  fprintf(opening,"%f\n", w2[2]);
+  fprintf(opening,"%f\n", w2[3]);
+  fprintf(opening,"%f\n", w3[0]);
+  fprintf(opening,"%f\n", w3[1]);
+  fprintf(opening,"%f\n", b1[0]);
+  fprintf(opening,"%f\n", b1[1]);
+  fprintf(opening,"%f\n", b2[0]);
+  fprintf(opening,"%f\n", b2[1]);
+  fprintf(opening,"%f\n", b2[0]);
+  fclose(opening);
+  return 0;
 }
